@@ -1,32 +1,12 @@
-local function editorStr()
-	local m = {
-		"koko is FAT",
-		"maya is a CAT",
-		"latte is a BAT",
-		"gaby is a RAT",
-		"neovim is life waster (please help me)",
-	}
-	return m[math.random(1, #m)]
-end
-
-local function sleepStr()
-	local m = {
-		"psst jester is asleep wake him up",
-		"jester is slacking of as we speak",
-		"SPAM HIS DMS HE ISN'T WORKING RIGHT NOW HE'S SLACKING",
-	}
-	return m[math.random(1, #m)]
-end
-
 return {
 	"vyfor/cord.nvim",
 	event = "VeryLazy",
 	build = ":Cord update",
 	opts = {
 		editor = {
-			tooltip = "the official kdot editor ✨",
+			tooltip = "integalactic janet editor 🌕☀️",
 			client = "neovim",
-			icon = "https://storage.ko-fi.com/cdn/useruploads/post/39d7fa2f-9353-4cb1-91f9-7c5c1c2d4f61_0f217d0189f841ae794500966ab1845a.jpg",
+			icon = "https://m.media-amazon.com/images/I/61AtfmdRdkL._UXNaN_FMjpg_QL85_.jpg",
 		},
 		display = {
 			swap_fields = true,
@@ -39,7 +19,7 @@ return {
 			details = "sleeping bleghh 💤",
 		},
 		text = {
-			workspace = "IN OVHOE",
+			workspace = "delulu workspace 💔",
 			viewing = "watching.. 👀",
 			editing = "crafting?? 💪 ",
 			file_browser = "looking at files 🤧",

@@ -37,6 +37,7 @@ local masontools = {
 	"taplo",
 	"r-languageserver",
 	"sqls",
+	"omnisharp",
 	-- "luau_lsp",
 }
 
@@ -70,15 +71,15 @@ local formatters = {
 	html = { "prettierd" },
 	css = { "prettierd" },
 	svelte = { "prettierd" },
-  markdown = { "markdownlint" },
+	markdown = { "markdownlint" },
 	graphql = { "prettierd" },
 	ruby = { "rubocop" },
 	bashls = { "shellharden" },
 }
 
 -- setup all the lsps here
-local function lspsetups(capabilities, lspconfig, on_attach)
-	lspconfig.lua_ls.setup({
+local function lspsetups(capabilities, on_attach)
+	vim.lsp.config["lua_ls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
 		on_init = function(client)
@@ -90,12 +91,8 @@ local function lspsetups(capabilities, lspconfig, on_attach)
 		runtime = {
 			version = "LuaJIT",
 		},
-	})
-	-- lspconfig.luau_lsp.setup({
-	-- 	capabilities = capabilities,
-	-- 	on_attach = on_attach(),
-	-- })
-	lspconfig.clangd.setup({
+	}
+	vim.lsp.config["clangd"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
 		cmd = {
@@ -108,40 +105,40 @@ local function lspsetups(capabilities, lspconfig, on_attach)
 			"--function-arg-placeholders",
 			"--fallback-style=llvm",
 		},
-	})
-	lspconfig.bashls.setup({
+	}
+	vim.lsp.config["bashls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
+	}
 	-- lspconfig.marksman.setup({
 	-- 	capabilities = capabilities,
 	-- 	on_attach = on_attach(),
 	-- })
-	lspconfig.ts_ls.setup({
+	vim.lsp.config["ts_ls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.pyright.setup({
+	}
+	vim.lsp.config["pyright"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.yamlls.setup({
+	}
+	vim.lsp.config["yamlls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.cssls.setup({
+	}
+	vim.lsp.config["cssls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.html.setup({
+	}
+	vim.lsp.config["html"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.taplo.setup({
+	}
+	vim.lsp.config["taplo"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
-	lspconfig.r_language_server.setup({
+	}
+	vim.lsp.config["r_language_server"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
 		-- settings is from nvim-lspconfig to pass in config options
@@ -152,11 +149,28 @@ local function lspsetups(capabilities, lspconfig, on_attach)
 				},
 			},
 		},
-	})
-	lspconfig.sqls.setup({
+	}
+	vim.lsp.config["sqls"] = {
 		capabilities = capabilities,
 		on_attach = on_attach(),
-	})
+	}
+	vim.lsp.config["omnisharp"] = {
+		capabilities = capabilities,
+		on_attach = on_attach(),
+	}
+
+  vim.lsp.enable("lua_ls")
+  vim.lsp.enable("clangd")
+  vim.lsp.enable("bashls")
+  vim.lsp.enable("ts_ls")
+  vim.lsp.enable("pyright")
+  vim.lsp.enable("yamlls")
+  vim.lsp.enable("cssls")
+  vim.lsp.enable("html")
+  vim.lsp.enable("taplo")
+  vim.lsp.enable("r_language_server")
+  vim.lsp.enable("sqls")
+  vim.lsp.enable("omnisharp")
 end
 
 return {
@@ -232,7 +246,7 @@ return {
 			-- lspconfig.languageserver.setup({})
 			-- :LspInfo to check lsps connected to current buffer
 
-			lspsetups(capabilities, lspconfig, on_attach)
+			lspsetups(capabilities, on_attach)
 		end,
 	},
 	-- linting w/nvim-lint

@@ -4,12 +4,7 @@ return {
 	init = function()
 		-- helper methods
 		local quotes = {
-			"The only way to do great work is to love what you do. - Steve Jobs",
-			"The seats are empty, the theatre is dark... why do you keep acting? - M. Gaby Cayambe Tenemaza",
-			"I must change my life so I can live it, not wait for it. - M. Gaby Cayambe Tenemaza",
-			"The biggest risk is not taking a risk at all - M. Gaby Cayambe Tenemaza",
-			"koko is BABES - M. Gaby Cayambe Tenemaza",
-			"just keep trying jester - Jester Santos",
+			"just keep trying jester",
 		}
 
 		local function getRandomQuote() -- no clue if this is the best way to do random nums in lua

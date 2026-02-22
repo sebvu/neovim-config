@@ -13,6 +13,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt.shiftwidth = 2
 		vim.opt.expandtab = true
 
-		vim.wo.conceallevel = 2
+		-- vim.wo.conceallevel = 2
 	end,
 })

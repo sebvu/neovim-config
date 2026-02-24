@@ -23,7 +23,7 @@ return {
 			offsets = {
 				{
 					filetype = "neo-tree",
-					text = "❤ Neo-Tree 󰄛",
+					text = "󰄛 Neo-Tree 󰄛",
 					highlight = "Directory",
 					seperator = true,
 				},

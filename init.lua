@@ -22,8 +22,8 @@ require("keymaps")
 require("lazy").setup({
 	spec = { -- plugin dirs
 		{ import = "sebvu.core.lsp" },
-		-- { import = "sebvu.core.linter" },
-		-- { import = "sebvu.core.format" },
+		{ import = "sebvu.core.linter" },
+		{ import = "sebvu.core.format" },
 	},
 
 	-- check for plugin updates

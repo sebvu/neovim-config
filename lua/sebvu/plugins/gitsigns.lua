@@ -1,4 +1,4 @@
-return {
+return { -- love this plugin sm
 	"lewis6991/gitsigns.nvim",
 	opts = {
 		signs = {

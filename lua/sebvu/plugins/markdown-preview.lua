@@ -1,4 +1,4 @@
-return {
+return { -- edit markdown files live
 	-- with yarn or npm
 	"iamcco/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

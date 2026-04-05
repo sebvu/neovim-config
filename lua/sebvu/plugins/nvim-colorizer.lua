@@ -3,7 +3,34 @@ return {
 	config = function()
 		local colorizer = require("colorizer")
 		colorizer.setup({
-			filetypes = { "*" },
+			filetypes = {
+				-- Web styling
+				"css",
+				"scss",
+				"sass",
+				"less",
+
+				-- HTML / UI
+				"html",
+				"javascriptreact", -- JSX
+				"typescriptreact", -- TSX
+
+				-- JS/TS (for inline styles / Tailwind)
+				"javascript",
+				"typescript",
+
+				-- Config / design tokens
+				"json",
+				"jsonc",
+				"yaml",
+				"toml",
+
+				-- Neovim / theming
+				"lua",
+
+				-- Docs / notes
+				"markdown",
+			},
 			options = {
 				parsers = {
 					RGB = true, -- #RGB hex codes

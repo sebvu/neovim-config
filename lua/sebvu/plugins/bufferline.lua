@@ -1,4 +1,4 @@
-return {
+return { -- bufferline display on top
 	"akinsho/bufferline.nvim",
 	lazy = false, -- needed for plugin to trigger without the need of the keys triggering it
 	version = "*",

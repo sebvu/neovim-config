@@ -1,8 +1,5 @@
-my neovim configuration
+sebvu's configs
 
-just be sure to install everything properly
-- use mason to install all lsps, formatters, linters, etc..
-- checkhealth to check what package deps. are needed
+after/lsp/ are for post-lsp configurations that need to be done
 
-
-
+this is like v3 of my config i think

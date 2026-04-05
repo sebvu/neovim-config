@@ -15,20 +15,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- setup configurations before loading plugins
+-- require pre-config options
 require("options")
 require("keymaps")
-require("specs")
 
--- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
-		-- import plugins
-		{ import = "sebvu.core" },
-		{ import = "sebvu.cmp-ai" },
-		{ import = "sebvu.extras" },
+	spec = { -- plugin dirs
+		{ import = "sebvu.core.lsp" },
+		-- { import = "sebvu.core.linter" },
+		-- { import = "sebvu.core.format" },
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- automatically check for plugin updates
+
+	-- check for plugin updates
 	checker = { enabled = true },
 })

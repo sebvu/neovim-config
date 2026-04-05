@@ -18,6 +18,14 @@ return { -- actual autocompletion engine
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
+			cmdline = {
+				enabled = true,
+				keymap = { preset = "cmdline" },
+				sources = { "buffer", "cmdline" },
+				completion = {
+					menu = { auto_show = true },
+				},
+			},
 			completion = {
 				menu = {
 					draw = {

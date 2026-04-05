@@ -23,6 +23,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		opts.desc = "Prev Diagnostic Jump"
 		keymap.set("n", "<leader>nl", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
+    opts.desc = "Show Outline"
+    keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", opts)
+
 		opts.desc = "Globally Rename"
 		keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
 	end,

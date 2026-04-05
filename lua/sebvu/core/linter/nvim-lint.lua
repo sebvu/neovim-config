@@ -48,8 +48,8 @@ return {
 			-- :h events to list all available events
 		})
 
-		vim.keymap.set("n", "<leader>l", function()
-			lint.try_lint()
-		end, { desc = "Lint the current buffer" })
+		-- vim.keymap.set("n", "<leader>l", function()
+		-- 	lint.try_lint()
+		-- end, { desc = "Lint the current buffer" })
 	end,
 }

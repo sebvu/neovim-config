@@ -18,6 +18,14 @@ return { -- actual autocompletion engine
 			-- ensure you have the `snippets` source (enabled by default)
 			sources = {
 				default = { "lsp", "lazydev", "path", "snippets", "buffer" },
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						-- make lazydev top priority i.e. :h blink.cmp
+						score_offset = 100,
+					},
+				},
 			},
 			cmdline = {
 				enabled = true,

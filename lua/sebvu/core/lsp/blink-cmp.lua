@@ -6,6 +6,7 @@ return { -- actual autocompletion engine
 		dependencies = {
 			"L3MON4D3/LuaSnip",
 			"onsails/lspkind.nvim",
+			"folke/lazydev.nvim",
 		},
 		build = "cargo build --release",
 		version = "v1.*",
@@ -16,7 +17,7 @@ return { -- actual autocompletion engine
 			snippets = { preset = "luasnip" },
 			-- ensure you have the `snippets` source (enabled by default)
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "lazydev", "path", "snippets", "buffer" },
 			},
 			cmdline = {
 				enabled = true,

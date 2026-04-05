@@ -12,10 +12,6 @@ local formatters = {
 	html = { "prettierd" },
 	css = { "prettierd" },
 	svelte = { "prettierd" },
-	markdown = { "markdownlint" },
-	graphql = { "prettierd" },
-	ruby = { "rubocop" },
-	bashls = { "shellharden" },
 }
 
 return {

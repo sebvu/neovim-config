@@ -20,7 +20,7 @@ return { -- this is basically required. cannot survive without cord.
 		},
 		text = {
 			workspace = "YEE YEE 🤠",
-			viewing = "watchin' caaattle 👀" ,
+			viewing = "watchin' caaattle 👀",
 			editing = "tap tap 👢",
 			file_browser = "scrollin' tequila 🍸",
 			docs = "reading man pages :(",

@@ -32,5 +32,8 @@ return {
   },
   init = function()
     vim.cmd("colorscheme kanagawa-dragon")
+		vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#49443C", bold = false })
+		vim.api.nvim_set_hl(0, "LineNr", { fg = "#DCA561", bold = true })
+		vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#49443C", bold = false })
   end
 }

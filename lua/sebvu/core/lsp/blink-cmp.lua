@@ -32,7 +32,6 @@ return { -- actual autocompletion engine
     },
     config = function(_, opts)
       require("blink.cmp").setup(opts) -- config overwrites opts, so setup opts
-      
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("luasnip.loaders.from_vscode").lazy_load() -- required by friendly-snippets
 

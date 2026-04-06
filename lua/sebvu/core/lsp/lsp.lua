@@ -54,6 +54,9 @@ return {
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 		opts = {
+			outline = {
+				win_position = "left",
+			},
 			ui = {
 				code_action = "󰇺",
 			},

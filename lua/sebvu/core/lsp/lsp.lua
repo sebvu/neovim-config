@@ -41,6 +41,10 @@ return {
 					package_uninstalled = "✗",
 				},
 			},
+			registries = { -- extend current registry
+				"github:mason-org/mason-registry",
+				"github:Crashdummyy/mason-registry",
+			},
 		},
 	},
 	{ -- lspsaga for improved lsp experience https://nvimdev.github.io/lspsaga/
@@ -61,6 +65,13 @@ return {
 				show_server_name = true,
 				extend_gitsigns = true,
 			},
+		},
+	},
+	{ -- roslyn language server for csharp development
+		"seblyng/roslyn.nvim",
+		ft = "cs",
+		opts = {
+			filewatching = "roslyn",
 		},
 	},
 }

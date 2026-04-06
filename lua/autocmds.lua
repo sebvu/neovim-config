@@ -12,7 +12,7 @@ local general_group = vim.api.nvim_create_augroup("GeneralAutocmds", { clear = t
 
 -- restore cursor to file position in previous editing sessions
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = general_group,
+	group = general_group,
 	callback = function(args)
 		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
 		local line_count = vim.api.nvim_buf_line_count(args.buf)
@@ -28,20 +28,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- set help windows to the left of screen
 vim.api.nvim_create_autocmd("FileType", {
-  group = general_group,
+	group = general_group,
 	pattern = "help",
 	command = "wincmd R",
 })
 
 -- auto resize to be equal when terminal window is resized
 vim.api.nvim_create_autocmd("VimResized", {
-  group = general_group,
+	group = general_group,
 	command = "wincmd =",
 })
 
 -- no auto continue comments on new lines
 vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("no_auto_comment", {clear = true}),
+	group = vim.api.nvim_create_augroup("no_auto_comment", { clear = true }),
 	callback = function()
 		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,

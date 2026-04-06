@@ -1,6 +1,6 @@
 {
-    "diagnostics.disable": [
-        "deprecated",
-        "undefined-field"
-    ]
+  "diagnostics.disable": [
+    "deprecated",
+    "undefined-field"
+  ]
 }

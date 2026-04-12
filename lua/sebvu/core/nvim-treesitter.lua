@@ -1,6 +1,7 @@
 return { -- thank you maintainer..
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	tag = "v0.10.0",
 	opts = {
 		ensure_installed = {
 			-- 	"c",

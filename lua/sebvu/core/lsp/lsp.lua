@@ -11,6 +11,8 @@ local requiredLsps = {
 	"eslint",
 	"clangd",
 	"bashls",
+	"jdtls",
+	"emmet_language_server",
 }
 
 return {

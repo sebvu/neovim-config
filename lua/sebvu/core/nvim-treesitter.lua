@@ -3,20 +3,30 @@ return { -- thank you maintainer..
 	build = ":TSUpdate",
 	opts = {
 		ensure_installed = {
-			-- 	"c",
-			-- 	"cpp",
-			-- 	"lua",
-			-- 	"javascript",
-			-- 	"typescript",
-			"javascriptreact",
-			"typescriptreact",
-			-- 	"html",
-			-- 	"css",
-			-- 	"vim",
-			-- 	"vimdoc",
-			-- 	"query",
-			-- 	"markdown",
-			-- 	"markdown_inline",
+      -- main languages
+			"c",
+			"cpp",
+			"java",
+			"python",
+			"lua",
+			"bash",
+
+      -- web dev
+			"javascript",
+			"typescript",
+			"tsx",
+			"jsx",
+			"html",
+			"css",
+
+      -- general
+			"vim",
+			"vimdoc",
+			"query",
+			"markdown",
+			"markdown_inline",
+			"regex",
+			"diff",
 		},
 		sync_install = true,
 		auto_install = true, -- will ensure a parser is installed for language

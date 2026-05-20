@@ -2,7 +2,7 @@ return { -- edit markdown files live
 	-- with yarn or npm
 	"iamcco/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	build = "cd app && yarn install",
+	build = "npm install",
 	init = function()
 		vim.g.mkdp_filetypes = { "markdown" }
 	end,

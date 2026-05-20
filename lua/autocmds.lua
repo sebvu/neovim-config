@@ -82,3 +82,12 @@ vim.api.nvim_create_autocmd("CursorMovedI", {
 		vim.lsp.buf.clear_references()
 	end,
 })
+
+-- for markdown, wrap
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown" },
+	callback = function()
+		vim.opt.wrap = true
+	end,
+})

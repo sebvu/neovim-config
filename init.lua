@@ -32,3 +32,8 @@ require("lazy").setup({
 	-- check for plugin updates
 	checker = { enabled = true },
 })
+
+vim.cmd.highlight({
+	"WinSeparator",
+	"guifg=#54546d guibg=#16161d",
+})

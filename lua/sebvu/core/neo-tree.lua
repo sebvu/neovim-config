@@ -44,7 +44,7 @@ return {
 		vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "NONE", ctermbg = "NONE" })
 	end,
 	keys = {
-		{ "<leader>e", "<cmd>Neotree<CR>", desc = "Open NeoTree" }, -- open tree
+		{ "<leader>e", "<cmd>Neotree reveal<CR>", desc = "Open NeoTree" }, -- open tree
 		{ "<leader>q", "<cmd>Neotree close<CR>", desc = "Close NeoTree" }, -- close tree
 	},
 }

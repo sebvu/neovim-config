@@ -1,39 +1,15 @@
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
-end
-vim.opt.rtp:prepend(lazypath)
+require('vim._core.ui2').enable({
+	enable = true,
+	msg = {
+		target = "cmd",
+		pager = { height = 0.5 },
+		dialog = { height = 0.5 },
+		cmd = { height = 0.5 },
+		msg = { height = 0.5, timeout = 4500 },
+	},
+})
 
--- require pre-config options
+require("keymaps")
 require("options")
 require("autocmds")
-require("keymaps")
-
-require("lazy").setup({
-	spec = { -- plugin dirs
-		{ import = "sebvu.core" },
-		{ import = "sebvu.plugins" },
-		{ import = "sebvu.core.lsp" },
-		{ import = "sebvu.core.linter" },
-		{ import = "sebvu.core.format" },
-	},
-
-	-- check for plugin updates
-	checker = { enabled = true },
-})
-
-vim.cmd.highlight({
-	"WinSeparator",
-	"guifg=#54546d guibg=#16161d",
-})
+require("lsp")

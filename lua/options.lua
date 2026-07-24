@@ -2,53 +2,41 @@ local opt = vim.opt
 
 -- Tab / Indentation
 
-opt.tabstop = 2 -- sets number of spaces a tab character takes up
-opt.shiftwidth = 2 -- sets number of spaces for each level of indentation
-opt.softtabstop = 2 -- when in insert mode, how many spaces occur in tab
-opt.expandtab = true -- converts tabs into spaces when opening a file
-opt.smartindent = true -- allows for auto indentation
-opt.wrap = false -- if we have long lines, we don't want lines to 'wrap' back around
+opt.tabstop = 4        -- spaces tab takes up
+opt.shiftwidth = 4     -- newline indentation spacing
+opt.softtabstop = 4    -- how many spaces occur when tabbing in insert mode
+opt.expandtab = true   -- converts tabs into spaces when opening a file
+opt.smartindent = true -- allow for auto indentation
+opt.wrap = false       -- by default, prevent line wrapping
 
 -- Search
 
-opt.incsearch = true -- as you add letters to your search, will highlight all matches associated
-opt.ignorecase = true -- ignore cases by default
-opt.smartcase = true -- if there is capitalization, then start utilizing cases
-opt.hlsearch = false -- highlighting searches
+opt.incsearch = true  -- as you add letters to search, will highlight all matches associated
+opt.ignorecase = true -- non-case sensitive search
+opt.smartcase = true  -- if capitalization, then start utilizing cases
+opt.hlsearch = false  -- highlight searches
 
 -- Appearence
 
-opt.relativenumber = true -- relative line numbers
-opt.number = true -- allows normal numbers
-opt.termguicolors = true -- allow full color support in terminal (SET TO FALSE FOR UGLY COLORS)
--- opt.colorcolumn = "80" -- set a column where we're going to insert a line
-opt.signcolumn = "yes" -- if a debugger is runner, keep gutter & necessary space available for insertion of debug icons
-opt.cmdheight = 1 -- cmd area 1 high
-opt.scrolloff = 5 -- if we scroll within x lines of bottom/top, start scrolling
-opt.completeopt = "menuone,noinsert,noselect" -- define how the completion menu will behave:
--- menuone - show 1 item in completion menu
--- noinsert - nothing will be inserted by default
--- noselect - nothing will be selected by default
+opt.relativenumber = true -- self explanatory
+opt.number = true         -- display normal line numbers
+opt.signcolumn = "yes"    -- gutter for debug icons
+opt.scrolloff = 5
+opt.inccommand = "split"  -- split preview when splitting
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.laststatus = 3 -- full status line for multiple screens
+-- vim.opt.guicursor = ""
 
 -- Behavior
 
-opt.showmode = false -- disables notification for mode changes
-opt.hidden = true -- change buffers without saving
-opt.errorbells = false -- disable error noises
-opt.swapfile = false -- no swap files, (PLEASE CHECK ON YOUR OWN JESTER)
-opt.backup = false -- no backup files, (PLEASE CHECK ON YOUR OWN JESTER)
-opt.undodir = vim.fn.expand("~/.vim/undodir") -- want undos to be saved and available
-opt.undofile = true -- true undofiles
-opt.backspace = "indent,eol,start" -- works on indentation, eol, and starts
-opt.splitright = true -- splitting terminal windows by default right
-opt.splitbelow = true -- splitting terminal horizontally by default to the bottom
-opt.autochdir = false -- automatically change directory we're in
--- opt.iskeyword:append("-") -- appends words seperated by - in to a whole word
--- opt.mouse:append('n') -- appending mouse in normal/visual
--- opt.mouse = ""
-opt.clipboard:append("unnamedplus") -- add register + to clipbord, allows us to copy and paste outside and inside vim
-opt.modifiable = true -- edit buffer you're in by default
--- opt.guicursor =
--- 	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
--- -- changes appearence of cursor (CHECK ON THIS JESTER CAUSE WE ARE GOING MOUSELESS)
-opt.encoding = "UTF-8" -- encoding for current buffer you're in is going to be set to UTF-8
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+vim.opt.undofile = true
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.isfname:append("@-@")
+
+-- completion helper
+vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
+vim.opt.shortmess:append("c")

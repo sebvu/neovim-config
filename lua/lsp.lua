@@ -36,11 +36,14 @@ vim.lsp.config("lua_ls", {
     }
 })
 
+-- to correspond with, must install LSPs via :Mas
 vim.lsp.enable({
     "lua_ls",
     "ts_ls",
     "emmet_language_server",
+    "css_variables",
     "pyright",
     "clangd",
-    "bashls"
+    "bashls",
+    "html"
 })

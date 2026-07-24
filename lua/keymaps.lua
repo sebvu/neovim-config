@@ -50,4 +50,8 @@ vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float(nil, { bord
 -- Buffer actions
 vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "H", "<cmd>bprev<CR>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Delete Current Buffer" })
+
+vim.keymap.set("n", "tL", "<cmd>tabnext<CR>", { desc = "Next Tab" })
+vim.keymap.set("n", "tH", "<cmd>tabprevious<CR>", { desc = "Previous Tab" })
+vim.keymap.set("n", "<leader>tbd", "<cmd>tabclose<CR>", { desc = "Delete Current Tab" })

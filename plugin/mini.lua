@@ -57,3 +57,26 @@ MiniSnippets.setup({
     },
 })
 MiniSnippets.start_lsp_server({ match = false })
+
+-- tabline
+
+local MiniTabline = require("mini.tabline")
+
+MiniTabline.setup({
+    -- Whether to show file icons (requires 'mini.icons')
+    show_icons = true,
+
+    -- Function which formats the tab label
+    -- By default surrounds with space and possibly prepends with icon
+    format = function(buf_id, label)
+        local suffix = vim.bo[buf_id].modified and '+ ' or ''
+        return MiniTabline.default_format(buf_id, label) .. suffix
+    end,
+
+    -- Where to show tabpage section in case of multiple vim tabpages.
+    -- One of 'left', 'right', 'none'.
+    tabpage_section = 'left',
+})
+
+
+-- statusline

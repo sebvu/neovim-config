@@ -46,3 +46,8 @@ end, { desc = "Toggle Builtin Undotree" })
 -- Floating diagnostic
 vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float(nil, { border = 'rounded' })<CR>",
     { desc = "Hover Diagnostics" })
+
+-- Buffer actions
+vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "H", "<cmd>bprev<CR>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Delete Buffer" })

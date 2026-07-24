@@ -16,6 +16,10 @@
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "gitsigns.nvim": {
+      "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "icon-picker.nvim": {
       "rev": "3ee9a0ea9feeef08ae35e40c8be6a2fa2c20f2d3",
       "src": "https://github.com/ziontee113/icon-picker.nvim"

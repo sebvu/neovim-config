@@ -34,5 +34,5 @@ require("kanagawa").setup({
 vim.cmd("colorscheme kanagawa-dragon")
 -- kanagawa-dragon specific colors
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#49443C", bold = false })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#DCA561", bold = true })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#D3D3FF", bold = true })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#49443C", bold = false })

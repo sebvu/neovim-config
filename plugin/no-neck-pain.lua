@@ -1,7 +1,13 @@
 vim.pack.add({ "https://github.com/shortcuts/no-neck-pain.nvim" })
 
 require("no-neck-pain").setup({
-	width = 150,
+	width = 160,
+	integration = {
+		NeoTree = {
+			position = "right",
+			reopen = true,
+		},
+	},
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {

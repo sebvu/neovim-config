@@ -54,8 +54,11 @@ vim.keymap.set(
 -- Buffer actions
 vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "H", "<cmd>bprev<CR>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>bn", "<cmd>enew<CR>", { desc = "New Window" })
+vim.keymap.set("n", "<leader>bD", "<cmd>%bd|e#<CR>", { desc = "Delete ALL buffers except self" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Delete Current Buffer" })
 
 vim.keymap.set("n", "tL", "<cmd>tabnext<CR>", { desc = "Next Tab" })
 vim.keymap.set("n", "tH", "<cmd>tabprevious<CR>", { desc = "Previous Tab" })
+vim.keymap.set("n", "<leader>tbn", "<cmd>tabnew<CR>", { desc = "New Buffer" })
 vim.keymap.set("n", "<leader>tbd", "<cmd>tabclose<CR>", { desc = "Delete Current Tab" })

@@ -16,6 +16,7 @@ local function getRandomQuote()
 end
 
 local dashboard = require("alpha.themes.dashboard")
+
 require("alpha").setup(dashboard.config)
 
 dashboard.section.header.val = {

@@ -23,20 +23,20 @@ opt.number = true -- display normal line numbers
 opt.signcolumn = "yes" -- gutter for debug icons
 opt.scrolloff = 5
 opt.inccommand = "split" -- split preview when splitting
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.laststatus = 3 -- full status line for multiple screens
+opt.splitbelow = true
+opt.splitright = true
+opt.laststatus = 3 -- full status line for multiple screens
 -- vim.opt.guicursor = ""
 
 -- Behavior
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
-vim.opt.undofile = true
-vim.opt.clipboard:append("unnamedplus")
-vim.opt.isfname:append("@-@")
+opt.swapfile = false
+opt.backup = false
+opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+opt.undofile = true
+opt.clipboard:append("unnamedplus")
+opt.isfname:append("@-@")
 
 -- completion helper
-vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
-vim.opt.shortmess:append("c")
+opt.completeopt = "menuone,noselect,fuzzy,nosort"
+opt.shortmess:append("c")

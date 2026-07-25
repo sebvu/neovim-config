@@ -26,6 +26,7 @@ opt.inccommand = "split" -- split preview when splitting
 opt.splitbelow = true
 opt.splitright = true
 opt.laststatus = 3 -- full status line for multiple screens
+opt.cursorline = false -- force cursor line highlights to be off
 -- vim.opt.guicursor = ""
 
 -- Behavior

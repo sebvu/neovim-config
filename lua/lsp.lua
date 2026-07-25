@@ -15,7 +15,7 @@ keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Globally Rename" }) 
 
 keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 
-keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format Local Buffer" })
+-- keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local Buffer" })
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -36,7 +36,8 @@ vim.lsp.config("lua_ls", {
     }
 })
 
--- to correspond with, must install LSPs via :Mas
+-- refer to nvim-lspconfig documentation or :h lspconfig-all for list of available LSPs
+-- to correspond with, must install LSPs via :Mason
 vim.lsp.enable({
     "lua_ls",
     "ts_ls",

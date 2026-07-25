@@ -14,6 +14,11 @@ MiniNotify.setup({
     },
 })
 
+-- mini surround
+local MiniSurround = require("mini.surround")
+
+MiniSurround.setup({})
+
 --- mini cmd correction
 local MiniCmdline = require("mini.cmdline")
 
@@ -66,13 +71,13 @@ MiniSnippets.setup({
 MiniSnippets.start_lsp_server({ match = false })
 
 local make_stop = function()
-  local au_opts = { pattern = '*:n', once = true }
-  au_opts.callback = function()
-    while MiniSnippets.session.get() do
-      MiniSnippets.session.stop()
+    local au_opts = { pattern = '*:n', once = true }
+    au_opts.callback = function()
+        while MiniSnippets.session.get() do
+            MiniSnippets.session.stop()
+        end
     end
-  end
-  vim.api.nvim_create_autocmd('ModeChanged', au_opts)
+    vim.api.nvim_create_autocmd('ModeChanged', au_opts)
 end
 local opts = { pattern = 'MiniSnippetsSessionStart', callback = make_stop }
 vim.api.nvim_create_autocmd('User', opts)

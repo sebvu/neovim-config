@@ -8,6 +8,10 @@
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"
     },
+    "conform.nvim": {
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "cord.nvim": {
       "rev": "8f081613c1314a0d6f38839c2788216621efb4d9",
       "src": "https://github.com/vyfor/cord.nvim"
@@ -33,8 +37,8 @@
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "kulala.nvim": {
-        "rev": "5c2234e1a0ae8a95911231682c52be2a13fcc117",
-        "src": "https://github.com/mistweaverco/kulala.nvim"
+      "rev": "5c2234e1a0ae8a95911231682c52be2a13fcc117",
+      "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",

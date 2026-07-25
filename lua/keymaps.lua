@@ -10,7 +10,7 @@ vim.keymap.set("n", "<leader>re", "<cmd>restart<CR><CR>", { desc = "Restart Neov
 opts.desc = "Vertical Split"
 vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<CR>", opts) -- vertical
 opts.desc = "Vertical Horizontal"
-vim.keymap.set("n", "<leader>sh", "<cmd>split<CR>", opts)  -- horizontal
+vim.keymap.set("n", "<leader>sh", "<cmd>split<CR>", opts) -- horizontal
 
 -- Horizontal scrolling
 opts.noremap = false
@@ -39,13 +39,17 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result cursor centered" 
 
 -- native undotree
 vim.keymap.set("n", "<leader>u", function()
-    vim.cmd.packadd("nvim.undotree")
-    require("undotree").open()
+	vim.cmd.packadd("nvim.undotree")
+	require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
 
 -- Floating diagnostic
-vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float(nil, { border = 'rounded' })<CR>",
-    { desc = "Hover Diagnostics" })
+vim.keymap.set(
+	"n",
+	"<leader>d",
+	"<cmd>lua vim.diagnostic.open_float(nil, { border = 'rounded' })<CR>",
+	{ desc = "Hover Diagnostics" }
+)
 
 -- Buffer actions
 vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "Next Buffer" })

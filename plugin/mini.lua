@@ -55,10 +55,29 @@ MiniSnippets.setup({
     snippets = {
         MiniSnippets.gen_loader.from_lang(), -- loads friendly-snippets automatically
     },
+    -- disable tabstop indicators
+    -- expand = {
+    --     insert = function(snippet)
+    --         MiniSnippets.default_insert(snippet, { empty_tabstop = "", empty_tabstop_final = "" })
+    --     end,
+    -- }
 })
+
 MiniSnippets.start_lsp_server({ match = false })
 
--- tabline
+local make_stop = function()
+  local au_opts = { pattern = '*:n', once = true }
+  au_opts.callback = function()
+    while MiniSnippets.session.get() do
+      MiniSnippets.session.stop()
+    end
+  end
+  vim.api.nvim_create_autocmd('ModeChanged', au_opts)
+end
+local opts = { pattern = 'MiniSnippetsSessionStart', callback = make_stop }
+vim.api.nvim_create_autocmd('User', opts)
+
+-- tabline --
 
 local MiniTabline = require("mini.tabline")
 
@@ -84,23 +103,24 @@ MiniTabline.setup({
 local MiniGit = require("mini.git")
 
 MiniGit.setup({
-  -- General CLI execution
-  job = {
-    -- Path to Git executable
-    git_executable = 'git',
+    -- General CLI execution
+    job = {
+        -- Path to Git executable
+        git_executable = 'git',
 
-    -- Timeout (in ms) for each job before force quit
-    timeout = 30000,
-  },
+        -- Timeout (in ms) for each job before force quit
+        timeout = 30000,
+    },
 
-  -- Options for `:Git` command
-  command = {
-    -- Default split direction
-    split = 'auto',
-  },
+    -- Options for `:Git` command
+    command = {
+        -- Default split direction
+        split = 'auto',
+    },
 })
 
-vim.keymap.set({ "n", "x" }, "<Leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show Git History at Cursor" })
+vim.keymap.set({ "n", "x" }, "<Leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>",
+    { desc = "Show Git History at Cursor" })
 
 -- mini diff
 

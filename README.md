@@ -1,3 +1,3 @@
-sebvu's configs
+sebvu's neovim configs
 
-v4, left lazy for vim-pack
+switched from lazy to vim-pack

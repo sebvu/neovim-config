@@ -89,27 +89,35 @@ local function addMiniFileGitIntegration()
 		return stat and stat.type == "link"
 	end
 
+	local function setupHighlights()
+		vim.api.nvim_set_hl(0, "MiniFilesGitStaged", { fg = "#89b4fa" })
+		vim.api.nvim_set_hl(0, "MiniFilesGitChange", { fg = "#fab387" })
+		vim.api.nvim_set_hl(0, "MiniFilesGitDelete", { fg = "#f38ba8" })
+		vim.api.nvim_set_hl(0, "MiniFilesGitUntrack", { fg = "#a6e3a1" })
+		vim.api.nvim_set_hl(0, "MiniFilesGitIgnore", { fg = "#6c7086" })
+	end
+	setupHighlights()
+	vim.api.nvim_create_autocmd("ColorScheme", { callback = setupHighlights })
+
 	---@type table<string, {symbol: string, hlGroup: string}>
 	---@param status string
 	---@return string symbol, string hlGroup
 	local function mapSymbols(status, is_symlink)
 		local statusMap = {
-    -- stylua: ignore start 
-    [" M"] = { symbol = "•", hlGroup  = "MiniDiffSignChange"}, -- Modified in the working directory
-    ["M "] = { symbol = "✹", hlGroup  = "MiniDiffSignChange"}, -- modified in index
-    ["MM"] = { symbol = "≠", hlGroup  = "MiniDiffSignChange"}, -- modified in both working tree and index
-    ["A "] = { symbol = "+", hlGroup  = "MiniDiffSignAdd"   }, -- Added to the staging area, new file
-    ["AA"] = { symbol = "≈", hlGroup  = "MiniDiffSignAdd"   }, -- file is added in both working tree and index
-    ["D "] = { symbol = "-", hlGroup  = "MiniDiffSignDelete"}, -- Deleted from the staging area
-    ["AM"] = { symbol = "⊕", hlGroup  = "MiniDiffSignChange"}, -- added in working tree, modified in index
-    ["AD"] = { symbol = "-•", hlGroup = "MiniDiffSignChange"}, -- Added in the index and deleted in the working directory
-    ["R "] = { symbol = "→", hlGroup  = "MiniDiffSignChange"}, -- Renamed in the index
-    ["U "] = { symbol = "‖", hlGroup  = "MiniDiffSignChange"}, -- Unmerged path
-    ["UU"] = { symbol = "⇄", hlGroup  = "MiniDiffSignAdd"   }, -- file is unmerged
-    ["UA"] = { symbol = "⊕", hlGroup  = "MiniDiffSignAdd"   }, -- file is unmerged and added in working tree
-    ["??"] = { symbol = "?", hlGroup  = "MiniDiffSignDelete"}, -- Untracked files
-    ["!!"] = { symbol = "!", hlGroup  = "MiniDiffSignChange"}, -- Ignored files
-			-- stylua: ignore end
+			[" M"] = { symbol = "•", hlGroup = "MiniFilesGitChange" },
+			["M "] = { symbol = "✹", hlGroup = "MiniFilesGitChange" },
+			["MM"] = { symbol = "≠", hlGroup = "MiniFilesGitChange" },
+			["A "] = { symbol = "+", hlGroup = "MiniFilesGitStaged" },
+			["AA"] = { symbol = "≈", hlGroup = "MiniFilesGitStaged" },
+			["D "] = { symbol = "-", hlGroup = "MiniFilesGitDelete" },
+			["AM"] = { symbol = "⊕", hlGroup = "MiniFilesGitChange" },
+			["AD"] = { symbol = "-•", hlGroup = "MiniFilesGitChange" },
+			["R "] = { symbol = "→", hlGroup = "MiniFilesGitChange" },
+			["U "] = { symbol = "‖", hlGroup = "MiniFilesGitChange" },
+			["UU"] = { symbol = "⇄", hlGroup = "MiniFilesGitStaged" },
+			["UA"] = { symbol = "⊕", hlGroup = "MiniFilesGitStaged" },
+			["??"] = { symbol = "?", hlGroup = "MiniFilesGitUntrack" },
+			["!!"] = { symbol = "!", hlGroup = "MiniFilesGitIgnore" },
 		}
 
 		local result = statusMap[status] or { symbol = "?", hlGroup = "NonText" }
@@ -118,10 +126,8 @@ local function addMiniFileGitIntegration()
 
 		local symlinkSymbol = is_symlink and "↩" or ""
 
-		-- Combine symlink symbol with Git status if both exist
 		local combinedSymbol = (symlinkSymbol .. gitSymbol):gsub("^%s+", ""):gsub("%s+$", "")
-		-- Change the color of the symlink icon from "MiniDiffSignDelete" to something else
-		local combinedHlGroup = is_symlink and "MiniDiffSignDelete" or gitHlGroup
+		local combinedHlGroup = is_symlink and "MiniFilesGitDelete" or gitHlGroup
 
 		return combinedSymbol, combinedHlGroup
 	end

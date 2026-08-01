@@ -38,6 +38,7 @@ vim.lsp.enable({
 	"ts_ls",
 	"emmet_language_server",
 	"css_variables",
+	"cssls",
 	"pyright",
 	"clangd",
 	"bashls",

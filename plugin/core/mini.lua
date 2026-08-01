@@ -20,7 +20,11 @@ local MiniDiff = require("mini.diff")
 MiniNotify.setup({})
 MiniIcons.setup({})
 MiniSurround.setup({})
-MiniCmdline.setup({})
+MiniCmdline.setup({
+	autocorrect = {
+		enable = false,
+	},
+})
 MiniPick.setup({})
 MiniExtra.setup({})
 -- MiniCompletion.setup({})

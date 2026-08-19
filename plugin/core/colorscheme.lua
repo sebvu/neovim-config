@@ -17,6 +17,8 @@ require("kanagawa").setup({
 			NormalFloat = { bg = "none" },
 			FloatBorder = { bg = "none" },
 			FloatTitle = { bg = "none" },
+			CursorLineNr = { fg = "#D3D3FF", bold = true },
+			WinSeparator = { fg = "#D3D3FF" },
 
 			-- Save an hlgroup with dark background and dimmed foreground
 			-- so that you can use it where your still want darker windows.
@@ -31,8 +33,4 @@ require("kanagawa").setup({
 	end,
 })
 
-vim.cmd("colorscheme kanagawa-wave")
-
-local LAVENDER = "#D3D3FF"
-
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = LAVENDER, bold = true })
+vim.cmd("colorscheme kanagawa-dragon")

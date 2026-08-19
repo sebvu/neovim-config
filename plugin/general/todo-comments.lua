@@ -11,7 +11,13 @@ vim.keymap.set("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 -- You can also specify a list of valid jump keywords
+-- vim.keymap.set("n", "]t", function()
+-- 	require("todo-comments").jump_next({ keywords = { "ERROR", "WARNING" } })
+-- end, { desc = "Next error/warning todo comment" })
 
-vim.keymap.set("n", "]t", function()
-	require("todo-comments").jump_next({ keywords = { "ERROR", "WARNING" } })
-end, { desc = "Next error/warning todo comment" })
+-- PERF: optimized
+-- HACK: this is a funky hack
+-- TODO: what was i supposed to do??
+-- NOTE: note stuff yay
+-- FIX: what the fuck is happening
+-- WARNING: be careful >:(

@@ -9,6 +9,8 @@ require("vim._core.ui2").enable({
 	},
 })
 
+vim.loader.enable()
+
 require("keymaps")
 require("options")
 require("autocmds")

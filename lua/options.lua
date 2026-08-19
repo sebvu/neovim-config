@@ -26,10 +26,10 @@ opt.inccommand = "split" -- split preview when splitting
 opt.splitbelow = true
 opt.splitright = true
 opt.laststatus = 3 -- full status line for multiple screens
-opt.cursorline = false -- force cursor line highlights to be off
-vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,"
+opt.cursorline = true -- force cursor line highlights to be off
+opt.cursorlineopt = "number"
+opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,"
 	.. "r-cr-o:hor20-Cursor,t:block-blinkon500-blinkoff500-TermCursor"
--- vim.opt.guicursor = ""
 
 -- Behavior
 

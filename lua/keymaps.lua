@@ -62,3 +62,6 @@ vim.keymap.set("n", "tL", "<cmd>tabnext<CR>", { desc = "Next Tab" })
 vim.keymap.set("n", "tH", "<cmd>tabprevious<CR>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<leader>tbn", "<cmd>tabnew<CR>", { desc = "New Buffer" })
 vim.keymap.set("n", "<leader>tbd", "<cmd>tabclose<CR>", { desc = "Delete Current Tab" })
+
+-- quick pullup for vim messages
+vim.keymap.set("n", "<leader>m", "<cmd>messages<CR>", { desc = "Open Vim Messages" })

@@ -7,7 +7,11 @@ vim.pack.add({
 
 local keymap = vim.keymap
 keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Check Code Actions" }) -- see available code actions
-keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Check Hover Documentation" }) -- show documentation for what is under cursor
+keymap.set("n", "K", function()
+	vim.lsp.buf.hover({
+		border = "rounded",
+	})
+end, { desc = "Check Hover Documentation" }) -- show documentation for what is under cursor
 keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Globally Rename" }) -- smart rename
 keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 -- keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local Buffer" })
@@ -35,7 +39,7 @@ vim.lsp.config("lua_ls", {
 -- to correspond with, must install LSPs via :Mason
 vim.lsp.enable({
 	"lua_ls",
-	"ts_ls",
+	"tsc",
 	"emmet_language_server",
 	"css_variables",
 	"cssls",

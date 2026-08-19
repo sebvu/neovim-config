@@ -32,7 +32,7 @@ require("kanagawa").setup({
 })
 
 vim.cmd("colorscheme kanagawa-wave")
--- kanagawa-dragon specific colors
--- vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "fujiWhite", bold = false })
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#D3D3FF", bold = true })
--- vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "fujiWhite", bold = false })
+
+local LAVENDER = "#D3D3FF"
+
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = LAVENDER, bold = true })

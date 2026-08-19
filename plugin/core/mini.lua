@@ -15,6 +15,7 @@ local MiniSnippets = require("mini.snippets")
 local MiniTabline = require("mini.tabline")
 local MiniGit = require("mini.git")
 local MiniDiff = require("mini.diff")
+local MiniIndentscope = require("mini.indentscope")
 
 -- MiniFiles.setup({})
 MiniNotify.setup({})
@@ -32,6 +33,12 @@ MiniExtra.setup({})
 -- MiniTabline.setup({})
 MiniGit.setup({})
 -- MiniDiff.setup({})
+MiniIndentscope.setup({
+	draw = {
+		delay = 20,
+		-- animation = MiniIndentscope.gen_animation.none(),
+	},
+})
 
 ----- Keymaps -----
 
@@ -75,6 +82,10 @@ vim.keymap.set(
 MiniFiles.setup({
 	mappings = {
 		go_in = "<CR>",
+	},
+	windows = {
+		preview = true,
+		width_preview = 30,
 	},
 })
 

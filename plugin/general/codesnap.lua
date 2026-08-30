@@ -29,5 +29,5 @@ require("codesnap").setup({
 	},
 })
 
-vim.keymap.set("v", "<leader>sc", "<cmd>CodeSnap<CR>", { desc = "Screenshot Code Snippet" })
-vim.keymap.set("v", "<leader>sC", "<cmd>CodeSnapHighlight<CR>", { desc = "Screenshot Highlight Code Snippet" })
+vim.keymap.set("v", "<leader>sc", ":CodeSnap<CR>", { desc = "Screenshot Code Snippet" })
+vim.keymap.set("v", "<leader>sC", ":CodeSnapHighlight<CR>", { desc = "Screenshot Highlight Code Snippet" })

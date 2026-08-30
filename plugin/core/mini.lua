@@ -6,7 +6,6 @@ vim.pack.add({
 local MiniFiles = require("mini.files")
 local MiniNotify = require("mini.notify")
 local MiniIcons = require("mini.icons")
-local MiniSurround = require("mini.surround")
 local MiniCmdline = require("mini.cmdline")
 local MiniPick = require("mini.pick")
 local MiniExtra = require("mini.extra")
@@ -20,7 +19,6 @@ local MiniIndentscope = require("mini.indentscope")
 -- MiniFiles.setup({})
 MiniNotify.setup({})
 MiniIcons.setup({})
-MiniSurround.setup({})
 MiniCmdline.setup({
 	autocorrect = {
 		enable = false,

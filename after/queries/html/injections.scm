@@ -11,4 +11,4 @@
       (attribute_value) @val
       (#eq? @val "text/babel")))
   content: (raw_text) @injection.content
-  (#set! injection.language "javascript")) ; or "tsx" if you use JSX syntax
+  (#set! injection.language "tsx")) ; or "tsx" if you use JSX syntax

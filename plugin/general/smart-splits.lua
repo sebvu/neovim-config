@@ -1,6 +1,16 @@
-vim.pack.add({ "https://github.com/mrjones2014/smart-splits.nvim" })
+vim.pack.add({
+	"https://github.com/smart-splits-nvim/backend-kitty", -- dependency
+	"https://github.com/smart-splits-nvim/backend-tmux", -- dependency
+	"https://github.com/smart-splits-nvim/smart-splits.nvim",
+})
 
-require("smart-splits").setup()
+-- dependencies
+
+require("smart-splits").setup({
+	mux = {
+		backend = { "smart-splits-backend-tmux" }, -- i only really use this for tmux lol
+	},
+})
 
 -- recommended mappings
 -- resizing splits
@@ -15,7 +25,6 @@ vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
 vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
 vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
 vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
-vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
 -- swapping buffers between windows
 vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
 vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)

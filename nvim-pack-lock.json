@@ -4,8 +4,16 @@
       "rev": "4ba26e41990c11620c96c0e1cff20eab65efde4a",
       "src": "https://github.com/goolord/alpha-nvim"
     },
+    "backend-kitty": {
+      "rev": "70665a2228d52c255f3d116a146932f326df3914",
+      "src": "https://github.com/smart-splits-nvim/backend-kitty"
+    },
+    "backend-tmux": {
+      "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+      "src": "https://github.com/smart-splits-nvim/backend-tmux"
+    },
     "codesnap.nvim": {
-      "rev": "e916bdcb4112bda11028ed8ec2dbff730e4248a4",
+      "rev": "fccc5c7a2a10ad04da83d0263d50dde7f6da2430",
       "src": "https://github.com/mistricky/codesnap.nvim"
     },
     "conform.nvim": {
@@ -17,7 +25,7 @@
       "src": "https://github.com/vyfor/cord.nvim"
     },
     "friendly-snippets": {
-      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "rev": "7a1c9f7897a4eb078b157a04c7af81e5869215b1",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "icon-picker.nvim": {
@@ -25,7 +33,7 @@
       "src": "https://github.com/ziontee113/icon-picker.nvim"
     },
     "image.nvim": {
-      "rev": "5c6f29a5069e1f7bd5773ce5907454063b0f125d",
+      "rev": "365e2ace0f619164ae6fd2f6f1d2807775dd6849",
       "src": "https://github.com/3rd/image.nvim"
     },
     "img-clip.nvim": {
@@ -33,7 +41,7 @@
       "src": "https://github.com/HakonHarnes/img-clip.nvim"
     },
     "indent-blankline.nvim": {
-      "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
+      "rev": "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "kanagawa.nvim": {
@@ -41,7 +49,7 @@
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "kulala.nvim": {
-      "rev": "232a9939919fe9bc88d573bce92de50f2f160c60",
+      "rev": "b2c4fc8bb54c5c57aa18933b4c08f8d040f69e0b",
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "mason.nvim": {
@@ -49,7 +57,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "9d01f392b33fb2ba36fbc87fc0bf4453e63ffb0a",
+      "rev": "f9ac12d7cbd2563cfc2cce9a8152fc8df2ad0d6f",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-colorizer.lua": {
@@ -57,15 +65,15 @@
       "src": "https://github.com/NvChad/nvim-colorizer.lua"
     },
     "nvim-lint": {
-      "rev": "3d55c8f67c6ae5c15e1042571e107c7a3d5c5f4e",
+      "rev": "52107ce2076a27a285af781248e2c59bad817cd0",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "ee1e369181a9e64904cdd7b739e98c70778cfc71",
+      "rev": "443d92c6bea761ab54cdde46fb197a2b4d614bdd",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
+      "rev": "19bdfc04f40ed2ccb3340591d125f759b0406875",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-ufo": {
@@ -73,16 +81,11 @@
       "src": "https://github.com/kevinhwang91/nvim-ufo"
     },
     "nvim-web-devicons": {
-      "rev": "5f032a85be210cd1c6ac98861eb3b187ff3bd5eb",
+      "rev": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
-    "obsidian.nvim": {
-      "rev": "7a2b7caf41de196de66f27c1969d0d429810621a",
-      "src": "https://github.com/obsidian-nvim/obsidian.nvim",
-      "version": ">=0.0.0"
-    },
     "oklch-color-picker.nvim": {
-      "rev": "8bf807853ccd7b7772fdc56951278a5347bb6d59",
+      "rev": "671aa293f4df65b300c194999efc9949d0baa721",
       "src": "https://github.com/eero-lehtinen/oklch-color-picker.nvim",
       "version": ">=0.0.0"
     },
@@ -95,8 +98,8 @@
       "src": "https://github.com/kevinhwang91/promise-async"
     },
     "smart-splits.nvim": {
-      "rev": "0ab2e4928dc867dfea3ff1da186e69f289d8a532",
-      "src": "https://github.com/mrjones2014/smart-splits.nvim"
+      "rev": "72d073c5a10f6aec93e7cb7f5dc450f9559ed376",
+      "src": "https://github.com/smart-splits-nvim/smart-splits.nvim"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",

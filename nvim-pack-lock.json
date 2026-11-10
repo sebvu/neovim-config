@@ -12,6 +12,11 @@
       "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
       "src": "https://github.com/smart-splits-nvim/backend-tmux"
     },
+    "codecompanion.nvim": {
+      "rev": "6794c8bcbe9e8614588749cafb5de29d7fa57c3b",
+      "src": "https://github.com/olimorris/codecompanion.nvim",
+      "version": "19.0.0 - 20.0.0"
+    },
     "codesnap.nvim": {
       "rev": "fccc5c7a2a10ad04da83d0263d50dde7f6da2430",
       "src": "https://github.com/mistricky/codesnap.nvim"
@@ -96,6 +101,10 @@
     "promise-async": {
       "rev": "119e8961014c9bfaf1487bf3c2a393d254f337e2",
       "src": "https://github.com/kevinhwang91/promise-async"
+    },
+    "render-markdown.nvim": {
+      "rev": "9c235bedc4f96145e63fcad5b78cd78bce8822c4",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "smart-splits.nvim": {
       "rev": "72d073c5a10f6aec93e7cb7f5dc450f9559ed376",

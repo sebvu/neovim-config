@@ -185,6 +185,9 @@ Tool arguments:
 						return file_search
 					end,
 				},
+				["read_file"] = {
+					opts = { require_approval_before = false },
+				},
 			},
 			sessions = {
 				enabled = true,

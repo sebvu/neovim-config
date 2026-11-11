@@ -1,20 +1,19 @@
--- deps
-vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim" })
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
--- main package
 vim.pack.add({
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{
 		src = "https://github.com/olimorris/codecompanion.nvim",
 		version = vim.version.range("^19.0.0"),
 	},
 })
 
+local sessions_dir = vim.fn.expand("~/notes/agent-sessions")
+vim.fn.mkdir(sessions_dir, "p")
+
 require("codecompanion").setup({
 	adapters = {
 		http = {
-			opts = {
-				show_model_choices = false,
-			},
+			opts = { show_presets = false },
 			openwebui = function()
 				return require("codecompanion.adapters").extend("openai_compatible", {
 					formatted_name = "Open WebUI",
@@ -22,213 +21,211 @@ require("codecompanion").setup({
 						url = "https://slop.blatant-lizardry.moe/openai",
 						chat_url = "/chat/completions",
 						models_endpoint = "/models",
-						-- called per request; an empty string keeps the request alive if the file is gone
+						-- Called on each request, so rotating the key needs no restart.
 						api_key = function()
-							local path = vim.fn.expand("~/.config/jester/secrets/slop.key")
-							if vim.fn.filereadable(path) == 0 then
+							local ok, lines = pcall(vim.fn.readfile, vim.fn.expand("~/.config/jester/secrets/slop.key"))
+							if not ok or not lines then
+								vim.notify_once("slop.key missing/unreadable", vim.log.levels.WARN)
 								return ""
 							end
-							return vim.fn.readfile(path)[1] or ""
+							for _, line in ipairs(lines) do
+								local trimmed = vim.trim(line)
+								if trimmed ~= "" then
+									return trimmed
+								end
+							end
+							return ""
 						end,
 					},
 					schema = {
 						model = {
 							default = "deepseek-ai/DeepSeek-V4.1-Flash-1017",
-							choices = {},
-							-- Token budget the context management triggers divide against: editing
-							-- (0.65) replaces old tool results with placeholders around 42k,
-							-- compaction (0.85) summarises the history around 56k. Exceeding the
-							-- real limit ends the conversation outright.
-							-- Not in the documented adapter schema (only meta.context_window is), so
-							-- this needs checking against the box: too low forces needless
-							-- compaction, too high overshoots. If it can't be confirmed, prefer
-							-- absolute token triggers under interactions.chat.opts.context_management.
-							context_window = 65536,
 						},
 					},
 				})
 			end,
 		},
 	},
-	opts = {
-		log_level = "ERROR",
-	},
 	interactions = {
 		chat = {
 			adapter = "openwebui",
-			-- Transcripts land in the notes folder rather than stdpath("data") so they
-			-- sit alongside everything else and can be grepped or attached with /file.
 			sessions = {
 				enabled = true,
 				autosave = true,
 				continuous_save = true,
-				save_dir = (function()
-					local dir = vim.fn.expand("~/notes/agent-sessions")
-					vim.fn.mkdir(dir, "p")
-					return dir
-				end)(),
-			},
-			keymaps = {
-				sessions = {
-					modes = { n = "gh" },
-					description = "Browse saved sessions",
-					callback = function()
-						require("codecompanion").sessions()
-					end,
-				},
-				save = {
-					modes = { n = "gS" },
-					description = "Save session now",
-					callback = function(chat)
-						chat:save()
-					end,
-				},
-			},
-			tools = {
-				-- Always available, otherwise the LLM has to be told about it per message.
-				opts = {
-					default_tools = { "file_exists" },
-				},
-				-- Lets the LLM cheaply test a path before spending an approval on
-				-- read_file. A miss returns the parent's neighbouring entries so it
-				-- can correct itself instead of guessing again. Read-only, so it runs
-				-- without asking, like the built-in file_search.
-				file_exists = {
-					name = "file_exists",
-					description = "Check whether a file or directory exists before reading or editing it",
-					opts = { require_approval_before = false },
-					system_prompt = [[## File Exists Tool (`file_exists`)
-
-## CONTEXT
-- You are in Neovim, where a wrong path in read_file fails with an error and costs the user an approval.
-
-### OBJECTIVE
-- Call this before read_file or insert_edit_into_file whenever you are not certain of a path.
-
-### RESPONSE
-- `exists: true` means the path is safe to pass to another tool.
-- `exists: false` lists nearby entries; pick one from those rather than guessing again.
-]],
-					schema = {
-						type = "function",
-						["function"] = {
-							name = "file_exists",
-							description = "Check whether a path exists and what it is, without reading its contents",
-							parameters = {
-								type = "object",
-								properties = {
-									path = {
-										type = "string",
-										description = "Absolute path, or a path relative to the current working directory",
-									},
-								},
-								required = { "path" },
-								additionalProperties = false,
-							},
-							strict = true,
-						},
-					},
-					cmds = {
-						---@param self table
-						---@param args table
-						---@return table
-						function(self, args)
-							local raw = (args.path or ""):match("^%s*(.-)%s*$")
-							if raw == "" then
-								return { status = "error", data = "No path was given" }
-							end
-
-							local path = vim.fn.fnamemodify(vim.fn.expand(raw), ":p")
-							local function pretty(p)
-								local home = vim.env.HOME or ""
-								if home == "" then
-									return p
-								end
-								return (p:gsub("^" .. (vim.esc or vim.pesc)(home), "~"))
-							end
-
-							local stat = (vim.uv or vim.loop).fs_stat(path)
-							if stat then
-								local kind = stat.type == "directory" and "directory" or "file"
-								return {
-									status = "success",
-									data = string.format("exists: true\n%s is a %s", pretty(path), kind),
-								}
-							end
-
-							local parent = vim.fs.dirname(path)
-							local lines = { "exists: false", string.format("%s does not exist.", pretty(path)) }
-
-							if not parent or vim.fn.isdirectory(parent) == 0 then
-								lines[#lines + 1] = "Its parent directory does not exist either."
-								return { status = "success", data = table.concat(lines, "\n") }
-							end
-
-							local wanted = vim.fs.basename(path)
-							local names, total = {}, 0
-							for name in vim.fs.dir(parent) do
-								total = total + 1
-								if #names < 25 then
-									names[#names + 1] = name
-								end
-							end
-							table.sort(names)
-
-							for _, name in ipairs(names) do
-								if name:lower() == wanted:lower() then
-									lines[#lines + 1] = string.format("Case differs: use `%s`.", name)
-									break
-								end
-							end
-
-							if total == 0 then
-								lines[#lines + 1] = string.format("Its parent, %s, is empty.", pretty(parent))
-							else
-								lines[#lines + 1] = string.format("Neighbours in %s:", pretty(parent))
-								for _, name in ipairs(names) do
-									lines[#lines + 1] = "  " .. name
-								end
-								if total > #names then
-									lines[#lines + 1] = string.format("  ...and %d more", total - #names)
-								end
-							end
-
-							return { status = "success", data = table.concat(lines, "\n") }
-						end,
-					},
-					output = {
-						---@param self table
-						---@param stdout table
-						---@param meta table
-						success = function(self, stdout, meta)
-							return meta.tools.chat:add_tool_output(self, tostring(stdout[1]))
-						end,
-						---@param self table
-						---@param stderr table
-						---@param meta table
-						error = function(self, stderr, meta)
-							return meta.tools.chat:add_tool_output(self, "file_exists failed: " .. tostring(stderr[1]))
-						end,
-					},
-				},
+				save_dir = sessions_dir,
 			},
 		},
 		inline = { adapter = "openwebui" },
+		cmd = { adapter = "openwebui" },
+		background = { adapter = "openwebui" },
 	},
 })
 
--- A query that fails to compile (e.g. a stale file in after/queries) raises out of
--- the markdown parse inside context_paths.attach, which aborts submit() and drops
--- the message. Attachment is a nicety, so keep sending even when it fails.
+vim.keymap.set("n", "<leader>cc", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Code Companion" })
+vim.keymap.set("n", "<leader>gh", function()
+	require("codecompanion").sessions()
+end, { desc = "Resume agent session" })
+
+-- State-change cues ---------------------------------------------------------
+-- Two clips only: one while the agent is blocked on your approval, one when the
+-- session is actually finished. Nothing plays while a request is merely in flight.
+
+-- --NOTE: install mpv for windowless audio (pacman -S mpv / apt install mpv).
+-- --NOTE: If it is absent the fallback is ffplay from ffmpeg in -nodisp mode,
+-- --NOTE: which also opens no window, so no install is strictly required.
 do
-	local context_paths = require("codecompanion.interactions.chat.helpers.context_paths")
-	local attach = context_paths.attach
-	context_paths.attach = function(opts)
-		local ok, err = pcall(attach, opts)
-		if not ok then
-			require("codecompanion.utils.log"):warn("[context_paths] %s", err)
+	local cues = {
+		enabled = true,
+		-- A "done" that lands while another round is already queued is a lie, so the
+		-- finished cue waits this long and any new request cancels it.
+		done_delay_ms = 700,
+		volume = 35,
+		clips = {
+			approval = "~/media/agent/approval.mp3",
+			done = "~/media/agent/done.mp3",
+		},
+	}
+
+	---@return string[]|nil
+	local function audio_command()
+		if vim.fn.executable("mpv") == 1 then
+			return {
+				"mpv",
+				"--no-video",
+				"--audio-display=no",
+				"--force-window=no",
+				"--no-terminal",
+				"--really-quiet",
+				"--no-resume-playback",
+				"--no-config",
+				"--volume=" .. cues.volume,
+			}
+		end
+		if vim.fn.executable("ffplay") == 1 then
+			return {
+				"ffplay",
+				"-nodisp",
+				"-autoexit",
+				"-loglevel",
+				"quiet",
+				"-sn",
+				"-volume",
+				tostring(cues.volume),
+			}
 		end
 	end
-end
 
-vim.keymap.set("n", "<leader>cc", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Code Companion" })
+	local playing
+	local function stop()
+		if playing then
+			pcall(playing.kill, playing, "sigterm")
+			playing = nil
+		end
+	end
+
+	---@param name "approval"|"done"
+	local function play(name)
+		if not cues.enabled then
+			return
+		end
+		local cmd = audio_command()
+		if not cmd then
+			return
+		end
+		local path = vim.fn.expand(cues.clips[name] or "")
+		if path == "" or vim.fn.filereadable(path) == 0 then
+			return
+		end
+		-- One clip at a time: a later cue replaces the one still playing.
+		stop()
+		local ok, proc = pcall(vim.system, vim.list_extend(cmd, { path }), { detach = true })
+		if ok then
+			playing = proc
+		end
+	end
+
+	local timer = vim.uv.new_timer()
+	local function cancel_done()
+		timer:stop()
+	end
+	local function schedule_done()
+		cancel_done()
+		timer:start(
+			cues.done_delay_ms,
+			0,
+			vim.schedule_wrap(function()
+				play("done")
+			end)
+		)
+	end
+
+	local group = vim.api.nvim_create_augroup("jester_codecompanion_cues", { clear = true })
+	local function on(event, callback)
+		vim.api.nvim_create_autocmd("User", { group = group, pattern = event, callback = callback })
+	end
+
+	-- In flight is never audible by itself, but it proves more output is coming.
+	for _, event in ipairs({
+		"CodeCompanionRequestStarted",
+		"CodeCompanionChatSubmitted",
+		"CodeCompanionToolStarted",
+	}) do
+		on(event, cancel_done)
+	end
+
+	-- Blocked on you: the only cue that interrupts.
+	for _, event in ipairs({
+		"CodeCompanionToolApprovalRequested",
+		"CodeCompanionToolQuestionAsked",
+		"CodeCompanionCLIApprovalRequested",
+	}) do
+		on(event, function()
+			cancel_done()
+			play("approval")
+		end)
+	end
+
+	-- Each finished round schedules "done"; the delay collapses the rounds that are
+	-- immediately followed by another (tool results feeding straight back in).
+	for _, event in ipairs({
+		"CodeCompanionRequestFinished",
+		"CodeCompanionChatDone",
+		"CodeCompanionInlineFinished",
+	}) do
+		on(event, schedule_done)
+	end
+
+	vim.api.nvim_create_autocmd("VimLeavePre", {
+		group = group,
+		callback = function()
+			cancel_done()
+			stop()
+			timer:close()
+		end,
+	})
+
+	vim.api.nvim_create_user_command("CueToggle", function()
+		cues.enabled = not cues.enabled
+		if not cues.enabled then
+			stop()
+			cancel_done()
+		end
+		vim.notify("Agent cues " .. (cues.enabled and "on" or "off"))
+	end, { desc = "Toggle agent cues" })
+
+	vim.api.nvim_create_user_command("CueTest", function(args)
+		local which = args.args ~= "" and args.args or "done"
+		if not cues.clips[which] then
+			vim.notify("Unknown cue: " .. which, vim.log.levels.WARN)
+			return
+		end
+		play(which)
+	end, {
+		nargs = "?",
+		desc = "Play an agent cue",
+		complete = function()
+			return { "approval", "done" }
+		end,
+	})
+end

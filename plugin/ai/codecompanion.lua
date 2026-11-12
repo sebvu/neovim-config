@@ -80,7 +80,7 @@ do
 		-- A "done" that lands while another round is already queued is a lie, so the
 		-- finished cue waits this long and any new request cancels it.
 		done_delay_ms = 700,
-		volume = 35,
+		volume = 10,
 		clips = {
 			approval = "~/media/agent/approval.mp3",
 			done = "~/media/agent/done.mp3",
